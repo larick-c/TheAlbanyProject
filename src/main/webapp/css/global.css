@@ -1,0 +1,94 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+#appHeader {     top: 0;
+                 position: fixed;
+                 width: 100%;
+                 height: 7%;
+                 color: white;
+                 background: lightskyblue; }
+    #title { text-align: center; height: 100%; width: 100%; }
+     #title h1 { height: 100%; display: flex;
+                 align-items: center;
+                 justify-content: center;
+                 font-family: monospace;
+     }
+#appBody { height: 100%; width: 100%; }
+#appContent { margin-top: 62px; }
+#appFooter { position: absolute; bottom: 0; width: 100%; background: white; }
+    #footer { height: 100%; }
+
+app-header {
+    text-align: center;
+    backgroung-color: blue;
+    height: 96px;
+}
+.head-butt { text-align: center; line-height: 62px; }
+.head-butt-input { line-height: unset; text-align: center; }
+app-toolbar {
+    height: 100%;
+}
+.one-edge-shadow {
+	-webkit-box-shadow: 0 8px 6px -6px #2138F8;
+	   -moz-box-shadow: 0 8px 6px -6px #2138F8;
+	        box-shadow: 0 8px 6px -6px #2138F8;
+}
+.bottom-edge-shadow {
+    box-shadow: 0px 0px 5px 2px #2138F8;
+}
+.top-edge-shadow {
+    box-shadow: 1px 0px 4px 0px #2138f8d1;
+}
+#container {
+    height: 100%;
+    width: 100%;
+    /*background: lightskyblue;*/
+    z-index: -100;
+}
+#container div {
+    /*height: 25%;
+    display: block;*/
+}
+paper-icon-button.tiny {
+  --iron-icon-height: 10px;
+  --iron-icon-width: 10px;
+}
+
+/*.sliding { border: solid; animation-duration: 1s; animation-name: slideInDown; animation-fill-mode: forwards; }*/
+#sliding {/* border: solid; */height: 55px;display: none;position: fixed;bottom: 1%;width: 100%;}
+@keyframes slideInDown {
+  from {
+    height: 0px;
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+
+  to {
+    height: 30px;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/*.slideInDown {
+  animation-name: slideInDown;
+  animation-fill-mode: forwards;
+}*/
+/* Apparently this is recommended
+@-ms-viewport{
+  width: device-width;
+}*/
+
+
+
+/*-----------------------Class Selector------------------------*/
+.cell { display: inline-block; width: 30%; }
+/*-----------------------ID Selector------------------------*/
+/*-----------------------Element Selector------------------------*/
+
+

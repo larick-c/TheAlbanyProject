@@ -1,0 +1,5 @@
+Heroku commands
+
+heroku war:deploy C:\Users\Cory\webTest\webTest\target\web.war --app strings-attached
+
+Restart all dynos	heroku ps:restart
