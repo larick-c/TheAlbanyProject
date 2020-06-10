@@ -3,13 +3,6 @@ import {PolymerElement, html} from '../../node_modules/@polymer/polymer/polymer-
 import '../../node_modules/jquery/dist/jquery.js';
 import '../../js/vendor/jquery.js';
 import '../../js/vendor/foundation.js';
-import { User } from '../../js/user.js';
-import { UserGroup } from '../../js/userGroup.js';
-import { Pot } from '../../js/pot.js';
-import { Bill } from '../../js/bill.js';
-import { BillGroup } from '../../js/billGroup.js';
-import { StringAttached } from '../../js/stringAttached.js';
-import { localStorageFunctions } from '../../js/localStorageFunctions.js';
 class mainContainer extends PolymerElement {
     static get template() {
         return html `
@@ -28,44 +21,25 @@ class mainContainer extends PolymerElement {
                 .grid-y { margin-top: 2%; }
                 paper-dialog { position: absolute;  background: Grey; top: 50%; left: 50%; transform: translate(-50%, -50%); }
             </style>
-            <iron-ajax id="getUsers"
-                url="/web/rest/resource/names"
-                method="get"
+            <iron-ajax id="addUsers"
+                url="/web/rest/resource/addUser?firstName={{firstName}}&lastName={{lastName}}"
+                method="post"
                 handle-as="json"
-                on-response="getUsersResponse"
-                on-error="getUsersResponse">
+                on-response="addUsersResponseSuccess"
+                on-error="addUsersResponseError">
             </iron-ajax>
             <div id="body">
                 <div id="body-wrapper">
-                        <div class="grid-y">
-                            <profile-card id="tableHeaders" style="width: 100%;">
-                                <div class="" slot="name">Num Users: </div>
-                                <div class="" slot="title">Total Due</div>
-                                <div class="" slot="school">Strings</div>
-                            </profile-card>
-                        </div>
-                        <div class="grid-y">
-                            <profile-card id="tableHeaders" style="width: 100%;">
-                                <div class="" slot= "name">Name</div>
-                                <div class="" slot="title">Amount Due</div>
-                                <div class="" slot="school">Strings-Attached</div>
-                            </profile-card>
-                        </div>
-                        <template id="userTemplate" is="dom-repeat" items="{{users}}" as="user">
-                            <div class="grid-y">
-                                <div class="cell shrink">
-                                    <profile-card style="width: 100%;" user="{{user}}"></profile-card>
-                                </div>
-                            </div>
-                        </template>
+                    <div style="text-align: center;">
+                        <!--<img style="height: 500px; width: 360px; margin-top: 1%;" src="./images/flowerWarmHome.jpg">-->
+                        <div>RSVP</div>
+                        <paper-input id="firstNameInput" label="First Name"></paper-input>
+                        <paper-input id="lastNameInput" label="Last Name"></paper-input>
+                        <paper-button on-click="addUser">Submit</paper-button>
                     </div>
                 </div>
             </div>
-            <paper-dialog id="newUserDialog">
-                <div>Hello This is a Dialog</div>
-            </paper-dialog>
         `;
-
     }
     constructor() {
       super();
@@ -74,23 +48,8 @@ class mainContainer extends PolymerElement {
 
     static get properties() {
       return {
-        mode: String,
-
-        users: {
-          type: Array,
-          value: [],
-          notify: true
-        },
-        pot: {
-          type: Object,
-          value: {},
-          notify: true
-        },
-        bills: {
-          type: Array,
-          value: [],
-          notify: true
-        }
+        firstName: {type: String, value: "", notify: true},
+        lastName: {type: String, value: "", notify: true}
       }
     }
     // Element class can define custom element reacti        console.log('profile-card created!');ons
@@ -101,41 +60,18 @@ class mainContainer extends PolymerElement {
     ready() {
         console.log("Main Container ready");
         super.ready();
-//        console.log(this.mode);
-//        console.log(this.users);
-//        this.pot = new Pot();
-        //this.users = new UserGroup(this.users.push("cory"));
-//        var numUsers = 0;
-//        var storageLocal = new localStorageFunctions();
-        this.updateUsers();
-//        this.users = storageLocal.getUsers();
-//        if (this.users === null){
-//            numUsers = 0;
-//        } else {
-//            numUsers = this.users.length;
-//        }
     }
-    updateValues(){
-        this.updateUsers();
+    addUser() {
+        console.log("add user");
+        this.firstName = this.$.firstNameInput.value;
+        this.lastName = this.$.lastNameInput.value;
+        this.$.addUsers.generateRequest();
     }
-    updateUsers(){
-        this.$.getUsers.generateRequest();
+    addUsersResponseSuccess(){
+        console.log("success");
     }
-    getUsersResponse(request, response) {
-        this.users = response.response;
-        this.$.userTemplate.render();
-    }
-    newBill(){
-        this.bills = new BillGroup();
-        var newBillDialog = document.querySelector('#app').querySelector('new-bill-dialog');
-        newBillDialog.open();
-    }
-    updatePot(){
-        console.log('update pot');
-        var localStorageBillGroup = JSON.parse(localStorage.getItem('billGroup'));
-        var billGroup = new BillGroup();
-        //billGroup.bills.push()
-        this.pot = new Pot(localStorageBillGroup);
+    addUsersResponseError(){
+        console.log("Error");
     }
 }
 

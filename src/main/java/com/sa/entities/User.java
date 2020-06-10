@@ -1,22 +1,10 @@
 package com.sa.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 @Entity
-@Table(name="USER_PROFILE", schema = "strings_attached")
+@Table(name="USERS_RSVP", schema = "public")
 public class User {
     private static final long serialVersionUID = 1L;
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinTable(name="user_strings", schema = "strings_attached",
-        joinColumns = @JoinColumn(name = "id_user"),
-        inverseJoinColumns = @JoinColumn(name = "string_id"))
-    @JsonIgnoreProperties("users")
-    private Set<StringAttached> stringsAttached = new HashSet<>();
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,20 +21,12 @@ public class User {
 
     }
 
-    public User (String firstName, String lastName, String email, Set<StringAttached> stringsAttached){
+    public User (String firstName, String lastName, String email){
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.stringsAttached = stringsAttached;
     }
 
-    public Set<StringAttached> getStringsAttached() {
-        return stringsAttached;
-    }
-
-    public void setStringsAttached(Set<StringAttached> stringsAttached) {
-        this.stringsAttached = stringsAttached;
-    }
 
     public Long getUserId() {
         return userId;

@@ -11,9 +11,5 @@ import './node_modules/@polymer/paper-dialog/paper-dialog.js';
 import './node_modules/@polymer/iron-ajax/iron-ajax.js';
 //JS
 //Custom Elements
-import './elements/profile-card/profile-card.js';
-import './elements/profile-card/new-user-dialog.js';
-import './elements/new-bill-dialog.js';
-import './elements/profile-card/users-to-remove-dialog.js';
 import './elements/main-container/main-container.js';
 //Classes

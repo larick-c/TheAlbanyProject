@@ -1,5 +1,5 @@
 Heroku commands
 
-heroku war:deploy C:\Users\Cory\webTest\webTest\target\web.war --app strings-attached
+heroku war:deploy thealbanyproject/thealbanyproject/target/web.war --app thealbanyproject
 
 Restart all dynos	heroku ps:restart

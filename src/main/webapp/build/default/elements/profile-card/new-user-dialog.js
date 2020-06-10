@@ -47,7 +47,7 @@ class newUserDialog extends PolymerElement {
                 #closeDialog { display: inline-block; }
             </style>
             <iron-ajax id="createUser"
-                url="/webTest/resource/createUser?firstName={{firstName}}&lastName={{lastName}}"
+                url="/theAlbanyProject/resource/createUser?firstName={{firstName}}&lastName={{lastName}}"
                 handle-as="json"
                 on-response="handleResponse"
             </iron-ajax>
